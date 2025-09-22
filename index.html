@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dangerous Object Detector (Webcam)</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- TensorFlow.js + COCO-SSD (pretrained, runs fully in-browser) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3"></script>
+</head>
+<body>
+  <header>
+    <h1>Dangerous Object Detector</h1>
+    <p>Runs in your browser. Click “Start Camera” and allow access.</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <button id="startBtn">Start Camera</button>
+      <button id="stopBtn" disabled>Stop Camera</button>
+      <label class="toggle">
+        <input type="checkbox" id="showAll" />
+        <span>Show all detections (not just dangerous)</span>
+      </label>
+      <span id="status">Loading model…</span>
+    </div>
+
+    <div class="stage">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <section class="legend">
+      <h2>Detected “dangerous” classes</h2>
+      <ul>
+        <li><code>knife</code></li>
+        <li><code>scissors</code></li>
+        <li><code>baseball bat</code></li>
+      </ul>
+      <p class="note">
+        Model: COCO-SSD (80 classes). It includes <em>knife</em> and <em>scissors</em>. It does
+        <strong>not</strong> include a specific <em>gun</em> class. For gun/weapon-specific models,
+        you’d need a different web-compatible model.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with TensorFlow.js COCO-SSD. No images leave your device.</p>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
